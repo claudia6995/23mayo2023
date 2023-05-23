@@ -1,0 +1,151 @@
+Cuadrado mágico en Java
+CÓMO GENERAR UN CUADRADO MÁGICO EN JAVA
+
+Programa para generar un cuadrado mágico de orden N, siendo N un entero positivo e impar. 
+
+Un cuadrado mágico de orden N es una matriz cuadrada de N filas y N columnas que contiene los números naturales desde 1 hasta N2. Los números se distribuyen dentro de la matriz de forma que todas las filas, columnas y diagonales principales suman lo mismo. 
+
+Por ejemplo, un cuadrado mágico de orden 3 es una matriz de tamaño 3 x 3 con el siguiente contenido:
+
+  8  1  6
+  3  5  7
+  4  9  2
+Se puede comprobar todas las filas de la matriz suman 15, todas las columnas suman 15 y las dos diagonales suman 15.
+
+Un cuadrado mágico de orden 5 es una matriz de 5 x 5 con el siguiente contenido:
+
+ 17   24    1    8   15
+ 23    5    7   14   16
+  4    6   13   20   22
+ 10   12   19   21    3
+ 11   18   25    2    9
+En este caso todas las filas, columnas y diagonales suman 65
+
+Un cuadrado mágico de orden N se construye siguiendo las siguientes reglas:
+
+El número 1 se coloca en la casilla central de la primera fila.
+Cada número siguiente se coloca en la casilla correspondiente a la fila anterior y columna siguiente del último número que se ha introducido.
+Si el número a introducir sigue a un múltiplo de N,  no se aplica la regla anterior sino que se coloca en la casilla de la fila posterior e igual columna.
+Se considera que la fila anterior a la primera es la última y la columna posterior a la última es la primera.
+Vamos a escribir un programa Java que genere e imprima un cuadrado mágico de orden N según estas normas.
+
+Solución:
+
+/*
+ * Programa que genera un cuadrado mágico de orden N, siendo N un entero positivo e impar. 
+ */
+import java.util.Scanner;
+public class CuadradoMagico {
+
+    public static void main(String[] args) {
+        //crear el array
+        int[][] M = crearArray();
+
+        //generar cuadrado mágico
+        cuadradoMagico(M);
+
+        //mostrar el array 
+        mostrarMatriz(M);
+    }
+
+    //método que crea un array cuadrado de N filas y N columnas
+    //el número de filas se introduce por teclado y se
+    //se crea y devuelve una matriz de ese tamaño
+    public static int[][] crearArray() {
+        Scanner sc = new Scanner(System.in);
+        int filas;
+        //lectura del número de filas
+        do {
+            System.out.print("Número de filas (impar): ");
+            filas = sc.nextInt();
+        } while (filas % 2 == 0 || filas < 0);
+        //crear la matriz cuadradda 
+        int[][] A = new int[filas][filas];
+        return A;
+    }
+
+    //método para crear un cuadrado mágico
+    //el método recibe una matriz y le asigna valores de forma
+    //que la matriz sea un cuadrado mágico
+    public static void cuadradoMagico(int[][] matriz) {                                                           
+        int N = matriz.length;
+        int i = 0, j = N / 2, cont = 1;
+        boolean multiplo = false;
+        matriz[i][j] = cont; //se coloca el 1 en el elemento central de la primera fila
+        for (cont = 2; cont <= N * N; cont++) { //for para colocar el resto de elementos en la matriz
+            if (!multiplo) {        //si el anterior número no es múltiplo de N
+                i--;                //fila anterior
+                if (i < 0){ 
+                    i = N - 1;
+                }
+                j++;                //columna siguiente
+                if (j >= N){ 
+                    j = 0; 
+                }
+            } else {                //si el anterior número es múltiplo de N
+                i++;                //fila siguiente, misma columna 
+                if (i >= N){
+                    i = 0;
+                }
+            }
+            matriz[i][j] = cont;
+            if (cont % N == 0){     //comprobamos si número actual es multiplo de N
+                multiplo = true;
+            } else { 
+                multiplo = false;
+            }
+        }
+    }
+
+    //método para mostrar el cuadrado mágico por pantalla
+    public static void mostrarMatriz(int[][] A) {
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                System.out.printf("%5d", A[i][j]);
+            }
+            System.out.println();
+        }
+    }
+}
+
+
+Si te ha sido útil compártelo
+		
+No hay comentarios:
+Publicar un comentario
+
+Entrada más recienteEntrada antiguaInicio
+Suscribirse a: Enviar comentarios (Atom)
+
+ENTRADAS POPULARES
+Java Ejercicios Básicos Resueltos 1
+Relación Nº 1: Ejercicios 1, 2 y 3 Empezaremos por unos ejercicios básicos de programas Java con estructura secuencial, es decir, en es...
+
+Java Scanner para lectura de datos
+Actualizado 2022 La clase Scanner está disponible a partir de Java 5 y facilita la lectura de datos en los programas Java. Primero vere...
+
+Matrices en Java
+Actualizado 2022 Un array en Java puede tener más de una dimensión. El caso más general son los arrays bidimensionales también llamados m...
+Java Ejercicios Básicos Resueltos 2
+Java Ejercicios Básicos estructura secuencial Actualizado 2020 Relación Nº 2: Ejercicios 4, 5, 6 y 7 Ejercicio 4: Programa que lea una ca...
+
+Estructuras de control en Java
+Las estructuras de control determinan la secuencia de ejecución de las sentencias de un programa.   Actualizado 2020 Los programas conti...
+
+Java ArrayList. Estructura dinámica de datos
+Actualizado 2022 DECLARACIÓN Y CREACIÓN DE UN ARRAYLIST ArrayList es una clase contenedora genérica que implementa arrays dinámicos de ...
+Licencia de Creative Commons
+Programación Java
+Enrique García Hernández
+SEGUIDORES
+
+TRANSLATE
+Seleccionar idioma​▼
+LENGUAJE C++
+Programacion C++
+Números amigos en C++
+LICENCIA
+Licencia de Creative Commons
+Programación Java by Enrique García Hernández
+Esta obra está bajo una licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 3.0 España License.
+Para reconocer la autoría debes poner el enlace http://puntocomnoesunlenguaje.blogspot.com.es

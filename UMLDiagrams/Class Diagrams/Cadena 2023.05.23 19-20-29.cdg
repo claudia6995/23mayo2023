@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Cadena">
+  <ClassDiagramComponents>
+    <Class name="Cadena" package="Class" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="frase" type="String" visibility="private"/>
+        <Field name="longitud" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="frase"/>
+          <Argument type="int" name="longitud"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getFrase" returnType="String" visibility="public"/>
+        <Method name="setFrase" returnType="void" visibility="public">
+          <Argument type="String" name="frase"/>
+        </Method>
+        <Method name="getLongitud" returnType="int" visibility="public"/>
+        <Method name="setLongitud" returnType="void" visibility="public">
+          <Argument type="int" name="longitud"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

@@ -1,0 +1,137 @@
+package Ej3Extra;
+
+import java.util.Scanner;
+
+class Juego {
+
+    Scanner leer = new Scanner(System.in);
+    public int N1;
+    public int N2;
+    public int intento1;
+    public int intento2;
+
+    public Juego() {
+    }
+
+    public Juego(int jugador1, int jugador2) {
+        this.N1 = jugador1;
+        this.N2 = jugador2;
+
+    }
+
+    public Scanner getLeer() {
+        return leer;
+    }
+    public int getN1() {
+        return N1;
+    }
+    public int getN2() {
+        return N2;
+    }
+    public void setLeer(Scanner leer) {
+        this.leer = leer;
+    }
+    public void setN1(int N1) {
+        this.N1 = N1;
+    }
+    public void setN2(int N2) {
+        this.N2 = N2;
+    }
+
+    public void IngresarDatos1() {
+        System.out.println(" Jugador 1 Ingrese un Número ");
+        N1 = leer.nextInt();
+    }
+
+    public void Adivinador1() {
+        System.out.println("Jugador Nº 2 ingrese 1 número\n  Intento Nº 1");
+        N2 = leer.nextInt();
+        int cont = 1;
+        for (int i = 1; i <= 4; i++) {
+            cont = i;
+            if (N1 < N2) {
+                System.out.println(" más bajo. \n Intento Nº" + (cont + 1) + "\n  Ingresá otro número nuevamente");
+                N2 = leer.nextInt();
+
+            } else if (N1 > N2) {
+                System.out.println("más alto. \n Intento Nº " + (cont + 1) + "\n  Ingresá otro número nuevamente");
+                N2 = leer.nextInt();
+            } else {
+                System.out.println("Correcto, adivinaste");
+                break;
+            }
+
+        }
+        if (N1 != N2) {
+            System.out.println("agotaste los intentos máximos, comienza un nuevo juego ");
+        }
+        System.out.println("***************");
+    }
+
+    public void IngresarDatos2() {
+        System.out.println(" Jugador 2 Ingrese un Número ");
+        N2 = leer.nextInt();
+        System.out.println("****************");
+    }
+
+    public void Adivinador2() {
+        System.out.println("Jugador Nº 1, ingrese 1 número\n  Intento Nº 1");
+        N1 = leer.nextInt();
+        int conta = 1;
+        for (int i = 1; i <= 4; i++) {
+            conta = i;
+            if (N2 < N1) {
+                System.out.println(" más bajo. \n Intento Nº" + (conta + 1) + "\n  Ingresá otro número nuevamente");
+                N1 = leer.nextInt();
+
+            } else if (N2 > N1) {
+                System.out.println("más alto. \n Intento Nº " + (conta + 1) + "\n  Ingresá otro número nuevamente");
+                N1 = leer.nextInt();
+            } else {
+                System.out.println("Correcto, adivinaste");
+                break;
+            }
+        }
+        if (N2 != N1) {
+            System.out.println("agotaste los intentos máximos, comienza un nuevo juego ");
+        }
+     }
+    public void Ganador() {
+        System.out.println(intento1);
+        System.out.println(intento2);
+        if (intento1 > intento2) {
+      System.out.println(" ganó el jugador 2 ");
+        }
+        else{
+      System.out.println("ganó el jugador 1");
+        }
+        
+    }
+
+}
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Ej3Extra;
+
+/**
+ *
+ * @author CRAMOS
+ */
+public class Mainl {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+      Juego J1 = new Juego();
+    J1.IngresarDatos1();
+    J1.Adivinador1();
+    J1.IngresarDatos2();
+    J1.Adivinador2();
+    J1.Ganador();
+    
+}
+}

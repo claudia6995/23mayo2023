@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Estudiante">
+  <ClassDiagramComponents>
+    <Class name="Estudiante" package="intENTIDAD" visibility="public" xPosition="249.0" yPosition="333.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations/>
+</ClassDiagram>

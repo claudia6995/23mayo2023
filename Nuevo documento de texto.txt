@@ -1,0 +1,185 @@
+--------------------------------Main--------------------------------------------------
+public class Guia10EjecicioExtra3 {
+
+
+    public static void main(String[] args) {
+    
+        HashSet <Libro> Libreria= new HashSet();
+        Libro LibroGral = new Libro();
+        Scanner Leer = new Scanner(System.in);
+int Resp;
+String Rta;    
+    do{
+    System.out.println("------------Selecione una Ópcion de Menú:------------");
+    System.out.println("");
+    System.out.println("          1- Agregar Libro a la Librería");
+    System.out.println("          2- Borrar Libro de la Librería");
+    System.out.println("          3- Mostrar Lista completa de La libreria");
+    System.out.println("          4- Retirar Libro");
+    System.out.println("          5- Devolver Libro");
+    System.out.println("          6- Salir");
+    
+    
+    Resp  = Leer.nextInt();
+    
+    switch (Resp){
+        case 1:
+            
+                do {
+                    LibroGral = new Libro();
+                    LibroGral.IngresarLibro();
+                    Libreria.add(LibroGral);
+                    Rta="";
+                    System.out.println("¿Desea Agregar otro libro?S/N");
+                    Leer = new Scanner(System.in);
+                    Rta = Leer.nextLine();
+                    while (!("N".equalsIgnoreCase(Rta) || "S".equalsIgnoreCase(Rta))){
+                       System.out.println("---------------!!!Ingreso Incorrecto¡¡¡---------------"); 
+                       System.out.println("¿Desea Agregar otro libro?S/N");
+                        Leer = new Scanner(System.in);
+                        Rta = Leer.nextLine();
+                    } 
+                } while (!"N".equalsIgnoreCase(Rta));
+                break;
+               
+         case 2:
+            System.out.println("Ingrese el Libro que desea eliminar de la Lista");    
+            Leer = new Scanner(System.in);
+            Rta  = Leer.nextLine();
+            Iterator<Libro> It = Libreria.iterator();
+            while(It.hasNext()){
+                if(It.next().getTitulo().equalsIgnoreCase(Rta)){
+                    It.remove();}}
+            break;       
+                
+         case 3:
+            for (Libro RecorrerLibro : Libreria) {
+                System.out.println(RecorrerLibro.toString());
+            }
+            break;        
+         case 4:LibroGral.RetirarLibro(Libreria,LibroGral);
+;    
+                
+        }
+
+        } while (Resp!=6);
+
+    
+    }
+}
+------------------------------------------------------------------------------------
+-------------------------------Entidad clase Libro-----------------------------
+
+public class Libro {
+private String Titulo,Autor;
+private int Ejemplares,Prestados=0;
+
+Scanner Leer = new Scanner(System.in);
+
+    public Libro() {
+    }
+
+    public Libro(String Titulo, String Autor, int Ejemplares, int Prestados) {
+        this.Titulo = Titulo;
+        this.Autor = Autor;
+        this.Ejemplares = Ejemplares;
+        this.Prestados = Prestados;
+    }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+
+    public String getAutor() {
+        return Autor;
+    }
+
+    public void setAutor(String Autor) {
+        this.Autor = Autor;
+    }
+
+    public int getEjemplares() {
+        return Ejemplares;
+    }
+
+    public void setEjemplares(int Ejemplares) {
+        this.Ejemplares = Ejemplares;
+    }
+
+    public int getPrestados() {
+        return Prestados;
+    }
+
+    public void setPrestados(int Prestados) {
+        this.Prestados = Prestados;
+    }
+
+    public Scanner getLeer() {
+        return Leer;
+    }
+
+    public void setLeer(Scanner Leer) {
+        this.Leer = Leer;
+    }
+
+    @Override
+    public String toString() {
+        return "Libro:" + "Titulo =" + Titulo + ", Autor =" + Autor + ", Ejemplares =" + Ejemplares + ", Prestados =" + Prestados + '}';
+    }
+
+public void IngresarLibro(){
+System.out.println("Ingrese Título del Nuevo Libro");    
+Titulo  = Leer.nextLine(); 
+System.out.println("Ingrese Autor del Libro");
+Autor  = Leer.nextLine();
+System.out.println("Ingrese Cantidad de Ejemplares a Ingresar");
+Ejemplares  = Leer.nextInt(); 
+}
+
+public void RetirarLibro(HashSet <Libro> Libreria,Libro LibroGral ){
+    System.out.println("Solo podra retirar hasta 3 libros por Ingreso");
+int Cont;String Rta;
+     Cont = 0;
+    
+        do {
+
+            System.out.println("Ingrese el Libro que desea Prestar de la Lista");
+            Leer = new Scanner(System.in);
+            Rta = Leer.nextLine();
+
+            for (Libro Recorrer : Libreria) {
+                if (Recorrer.getTitulo().equalsIgnoreCase(Rta)) {
+                    System.out.println("El libro se encuentra.¿Confirmar retiro?S/N");
+                    if ("S".equalsIgnoreCase(Leer.nextLine())) {
+                        if (Recorrer.getEjemplares() == 0) {
+                            System.out.println("Para ese titulo no se encuentran mas ejemplares");
+                        } else {
+                            Recorrer.setEjemplares(Recorrer.getEjemplares() - 1);
+                            Recorrer.setPrestados(Recorrer.getPrestados() + 1);
+                            Cont = Cont + 1;
+                        }
+                    }
+                }
+            }
+            Rta = "";
+            System.out.println("¿Desea Retirar otro libro?S/N");
+            Leer = new Scanner(System.in);
+            Rta = Leer.nextLine();
+            while (!("N".equalsIgnoreCase(Rta) || "S".equalsIgnoreCase(Rta))) {
+                System.out.println("---------------!!!Ingreso Incorrecto¡¡¡---------------");
+                System.out.println("¿Desea Retirar otro libro?S/N");
+                Leer = new Scanner(System.in);
+                Rta = Leer.nextLine();
+            }
+         System.out.println("Contador"+Cont);   
+        } while (!"N".equalsIgnoreCase(Rta) && Cont<3);
+        
+        
+
+}
+
+}
